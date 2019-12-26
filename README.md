@@ -11,4 +11,4 @@ To encrypt
 1. node index encrypt --key "sample password" --object "sample object to be encrypted"
 
 To decrypt
-2. node index decrypt --key "sample password" --object "sample object to be decrypted"
+1. node index decrypt --key "sample password" --object "sample object to be decrypted"
