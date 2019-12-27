@@ -9,7 +9,10 @@ function generateKey(byteSize,password){
 }
 
 function encryptAES(iv,key,object){
-    let cipher = forge.cipher.createCipher('AES-CBC',key);
+    let md = forge.md.sha256.create();
+    md.update(key)
+    let processedKey = md.digest();
+    let cipher = forge.cipher.createCipher('AES-CBC',processedKey);
     cipher.start({iv:iv});
     cipher.update(forge.util.createBuffer(object));
     let result = cipher.finish();
@@ -23,7 +26,10 @@ function encryptAES(iv,key,object){
 }
 
 function decryptAES(iv,key,object){
-    let decipher = forge.cipher.createDecipher('AES-CBC',key);
+    let md = forge.md.sha256.create();
+    md.update(key)
+    let processedKey = md.digest();
+    let decipher = forge.cipher.createDecipher('AES-CBC',processedKey);
     decipher.start({iv:iv});
     decipher.update(object);
     let result = decipher.finish();

@@ -24,9 +24,9 @@ program.parse(process.argv);
 if(cmdValue == 'encrypt'){
     console.log("In encryption mode");
     var pair = crypto.generateKey(128,program.commands[0].key);
-    var payload = encrypt(pair.iv,pair.key,program.commands[0].object);
+    var payload = encrypt(pair.iv,program.commands[0].key,program.commands[0].object);
     console.log(`This is the encrypted payload: ${payload.toHex()}`);
-    var plainText = decrypt(pair.iv,pair.key,payload);
+    var plainText = decrypt(pair.iv,program.commands[0].key,payload);
     console.log(`This is the decrypted plaintext: ${plainText.toString('utf-8')}`);
 }else if(cmdValue == 'decrypt'){
     console.log("In decryption mode");
